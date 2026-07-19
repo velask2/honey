@@ -105,10 +105,11 @@ export async function sendDealsEmail(deals) {
   }
 
   const resend = new Resend(process.env.RESEND_API_KEY);
+  const recipients = process.env.TO_EMAIL.split(',').map((email) => email.trim());
 
   await resend.emails.send({
     from: 'honey <onboarding@resend.dev>',
-    to: process.env.TO_EMAIL,
+    to: recipients,
     subject:
       deals.length > 0
         ? `${ORIGIN}→${DESTINATION}: ${deals.length} deal${deals.length > 1 ? 's' : ''} worth a look`
