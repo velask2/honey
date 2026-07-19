@@ -1,0 +1,15 @@
+{
+  "name": "honey",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Daily MAD -> MIA flight deal agent",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.0",
+    "resend": "^4.0.0"
+  }
+}
