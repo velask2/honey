@@ -1,11 +1,16 @@
 import { Resend } from 'resend';
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
 import { ORIGIN, DESTINATION } from './fetch.js';
-import { LOGO_DATA_URI } from './assets/logo.js';
 
 const BRAND_BLUE = '#3043aa';
 const CARD_BG = '#f2f2f7';
 const TEXT_GRAY = '#4b4b4b';
 const FONT_STACK = "'Helvetica Neue', Helvetica, Arial, sans-serif";
+
+const LOGO_PATH = path.join(path.dirname(fileURLToPath(import.meta.url)), 'assets', 'logo.png');
+const LOGO_CONTENT_ID = 'honey-logo';
 
 const CURRENCY_SYMBOLS = { EUR: '€', USD: '$', GBP: '£' };
 
@@ -65,7 +70,7 @@ export function buildHtml(deals) {
   const header = `
   <tr>
     <td style="text-align:center;padding:0 0 32px 0;">
-      <img src="${LOGO_DATA_URI}" width="200" alt="Honey" style="display:block;margin:0 auto 8px auto;" />
+      <img src="cid:${LOGO_CONTENT_ID}" width="200" alt="Honey" style="display:block;margin:0 auto 8px auto;" />
       <div style="font-family:${FONT_STACK};font-size:32px;font-weight:700;color:${BRAND_BLUE};">
         ${ORIGIN} &rarr; ${DESTINATION}
       </div>
@@ -107,6 +112,14 @@ export async function sendDealsEmail(deals) {
 
   await resend.emails.send({
     from: 'honey <onboarding@resend.dev>',
+    attachments: [
+      {
+        filename: 'logo.png',
+        content: readFileSync(LOGO_PATH),
+        content_type: 'image/png',
+        content_id: LOGO_CONTENT_ID,
+      },
+    ],
     to: process.env.TO_EMAIL,
     subject:
       deals.length > 0
