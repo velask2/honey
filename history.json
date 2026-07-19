@@ -58,5 +58,47 @@
     "currency": "EUR",
     "airline": "Duffel Airways",
     "seenAt": "2026-07-19"
+  },
+  "2026-12-18": {
+    "amount": 525.55,
+    "currency": "EUR",
+    "airline": "Duffel Airways",
+    "seenAt": "2026-07-19"
+  },
+  "2026-12-19": {
+    "amount": 512.83,
+    "currency": "EUR",
+    "airline": "Duffel Airways",
+    "seenAt": "2026-07-19"
+  },
+  "2026-12-20": {
+    "amount": 510.86,
+    "currency": "EUR",
+    "airline": "American Airlines",
+    "seenAt": "2026-07-19"
+  },
+  "2026-12-21": {
+    "amount": 504.72,
+    "currency": "EUR",
+    "airline": "American Airlines",
+    "seenAt": "2026-07-19"
+  },
+  "2026-12-22": {
+    "amount": 512.37,
+    "currency": "EUR",
+    "airline": "Iberia",
+    "seenAt": "2026-07-19"
+  },
+  "2026-12-23": {
+    "amount": 508.93,
+    "currency": "EUR",
+    "airline": "Iberia",
+    "seenAt": "2026-07-19"
+  },
+  "2026-12-24": {
+    "amount": 1432.77,
+    "currency": "EUR",
+    "airline": "Avianca",
+    "seenAt": "2026-07-19"
   }
 }
