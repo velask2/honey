@@ -6,15 +6,15 @@
     "seenAt": "2026-07-19"
   },
   "2026-08-06": {
-    "amount": 506.08,
+    "amount": 502.61,
     "currency": "EUR",
     "airline": "American Airlines",
     "seenAt": "2026-07-19"
   },
   "2026-08-15": {
-    "amount": 502.98,
+    "amount": 502.86,
     "currency": "EUR",
-    "airline": "Duffel Airways",
+    "airline": "American Airlines",
     "seenAt": "2026-07-19"
   },
   "2026-08-24": {
@@ -30,7 +30,7 @@
     "seenAt": "2026-07-19"
   },
   "2026-09-11": {
-    "amount": 504.41,
+    "amount": 503.04,
     "currency": "EUR",
     "airline": "American Airlines",
     "seenAt": "2026-07-19"
