@@ -1,1 +1,62 @@
-{}
+{
+  "2026-07-28": {
+    "amount": 509.71,
+    "currency": "EUR",
+    "airline": "Iberia",
+    "seenAt": "2026-07-19"
+  },
+  "2026-08-06": {
+    "amount": 506.08,
+    "currency": "EUR",
+    "airline": "American Airlines",
+    "seenAt": "2026-07-19"
+  },
+  "2026-08-15": {
+    "amount": 504.73,
+    "currency": "EUR",
+    "airline": "American Airlines",
+    "seenAt": "2026-07-19"
+  },
+  "2026-08-24": {
+    "amount": 509.3,
+    "currency": "EUR",
+    "airline": "Iberia",
+    "seenAt": "2026-07-19"
+  },
+  "2026-09-02": {
+    "amount": 508.06,
+    "currency": "EUR",
+    "airline": "American Airlines",
+    "seenAt": "2026-07-19"
+  },
+  "2026-09-11": {
+    "amount": 509.13,
+    "currency": "EUR",
+    "airline": "British Airways",
+    "seenAt": "2026-07-19"
+  },
+  "2026-09-20": {
+    "amount": 527.72,
+    "currency": "EUR",
+    "airline": "Air Europa",
+    "seenAt": "2026-07-19"
+  },
+  "2026-09-29": {
+    "amount": 504.47,
+    "currency": "EUR",
+    "airline": "British Airways",
+    "seenAt": "2026-07-19"
+  },
+  "2026-10-08": {
+    "amount": 505.87,
+    "currency": "EUR",
+    "airline": "Duffel Airways",
+    "seenAt": "2026-07-19"
+  },
+  "2026-10-17": {
+    "amount": 511.18,
+    "currency": "EUR",
+    "airline": "Iberia",
+    "seenAt": "2026-07-19"
+  }
+}
