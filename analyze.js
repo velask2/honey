@@ -44,7 +44,10 @@ export async function analyzeFares(fares, history) {
   const text = message.content
     .filter((block) => block.type === 'text')
     .map((block) => block.text)
-    .join('');
+    .join('')
+    .trim()
+    .replace(/^```(?:json)?\s*/, '')
+    .replace(/```\s*$/, '');
 
   try {
     return JSON.parse(text);
