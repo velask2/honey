@@ -1,8 +1,8 @@
 import { setTimeout as sleep } from 'node:timers/promises';
 
 const DUFFEL_API_URL = 'https://api.duffel.com/air/offer_requests';
-const ORIGIN = 'MAD';
-const DESTINATION = 'MIA';
+export const ORIGIN = 'MAD';
+export const DESTINATION = 'MIA';
 const TRIP_LENGTH_DAYS = 7; // length of stay assumed for each round trip
 const SAMPLE_COUNT = 10; // number of departure dates to check per run
 const SAMPLE_WINDOW_DAYS = 90; // spread samples across the next ~3 months

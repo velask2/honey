@@ -1,34 +1,98 @@
 import { Resend } from 'resend';
+import { ORIGIN, DESTINATION } from './fetch.js';
+import { LOGO_DATA_URI } from './assets/logo.js';
+
+const BRAND_BLUE = '#3043aa';
+const CARD_BG = '#f2f2f7';
+const TEXT_GRAY = '#4b4b4b';
+const FONT_STACK = "'Helvetica Neue', Helvetica, Arial, sans-serif";
+
+const CURRENCY_SYMBOLS = { EUR: '€', USD: '$', GBP: '£' };
+
+function formatPrice(deal) {
+  const symbol = CURRENCY_SYMBOLS[deal.currency] ?? `${deal.currency} `;
+  return `${deal.amount.toFixed(2)} ${symbol}`;
+}
+
+function googleFlightsUrl(deal) {
+  const query = `Flights from ${ORIGIN} to ${DESTINATION} on ${deal.departureDate} through ${deal.returnDate}`;
+  return `https://www.google.com/travel/flights?q=${encodeURIComponent(query)}`;
+}
 
 function formatDeal(deal) {
   return `
-    <tr>
-      <td style="padding:12px 16px;border-bottom:1px solid #eee;">
-        <strong>${deal.departureDate} &rarr; ${deal.returnDate}</strong><br/>
-        <span style="color:#555;">${deal.airline}</span>
-      </td>
-      <td style="padding:12px 16px;border-bottom:1px solid #eee;text-align:right;">
-        <strong>${deal.amount} ${deal.currency}</strong>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2" style="padding:0 16px 12px 16px;border-bottom:1px solid #eee;color:#777;font-size:14px;">
-        ${deal.reason}
-      </td>
-    </tr>`;
+  <tr>
+    <td style="padding:0 0 24px 0;">
+      <a href="${googleFlightsUrl(deal)}" style="display:block;text-decoration:none;color:inherit;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:${CARD_BG};border-radius:24px;">
+          <tr>
+            <td style="padding:32px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="font-family:${FONT_STACK};font-size:16px;color:#000000;padding-bottom:12px;">
+                    ${deal.departureDate} &nbsp;&rarr;&nbsp; ${deal.returnDate}
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding-bottom:12px;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td style="font-family:${FONT_STACK};font-size:32px;font-weight:700;color:#000000;">
+                          ${deal.airline}
+                        </td>
+                        <td style="font-family:${FONT_STACK};font-size:32px;font-weight:700;color:#000000;text-align:right;white-space:nowrap;">
+                          ${formatPrice(deal)}
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="font-family:${FONT_STACK};font-size:16px;color:${TEXT_GRAY};">
+                    ${deal.reason}
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </a>
+    </td>
+  </tr>`;
 }
 
-function buildHtml(deals) {
-  if (deals.length === 0) {
-    return '<p>No standout deals today for MAD &rarr; MIA.</p>';
-  }
+export function buildHtml(deals) {
+  const header = `
+  <tr>
+    <td style="text-align:center;padding:0 0 32px 0;">
+      <img src="${LOGO_DATA_URI}" width="200" alt="Honey" style="display:block;margin:0 auto 8px auto;" />
+      <div style="font-family:${FONT_STACK};font-size:32px;font-weight:700;color:${BRAND_BLUE};">
+        ${ORIGIN} &rarr; ${DESTINATION}
+      </div>
+    </td>
+  </tr>`;
+
+  const body =
+    deals.length > 0
+      ? deals.map(formatDeal).join('')
+      : `
+  <tr>
+    <td style="padding:32px;background:${CARD_BG};border-radius:24px;text-align:center;font-family:${FONT_STACK};font-size:16px;color:${TEXT_GRAY};">
+      No standout deals today for ${ORIGIN} &rarr; ${DESTINATION}.
+    </td>
+  </tr>`;
+
   return `
-  <div style="font-family:sans-serif;max-width:560px;margin:0 auto;">
-    <h2>MAD &rarr; MIA — today's best deals</h2>
-    <table style="width:100%;border-collapse:collapse;">
-      ${deals.map(formatDeal).join('')}
-    </table>
-  </div>`;
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#ffffff;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
+          ${header}
+          ${body}
+        </table>
+      </td>
+    </tr>
+  </table>`;
 }
 
 export async function sendDealsEmail(deals) {
@@ -46,8 +110,8 @@ export async function sendDealsEmail(deals) {
     to: process.env.TO_EMAIL,
     subject:
       deals.length > 0
-        ? `MAD→MIA: ${deals.length} deal${deals.length > 1 ? 's' : ''} worth a look`
-        : 'MAD→MIA: nothing special today',
+        ? `${ORIGIN}→${DESTINATION}: ${deals.length} deal${deals.length > 1 ? 's' : ''} worth a look`
+        : `${ORIGIN}→${DESTINATION}: nothing special today`,
     html: buildHtml(deals),
   });
 }
