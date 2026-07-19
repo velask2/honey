@@ -107,7 +107,7 @@ export async function sendDealsEmail(deals) {
   const resend = new Resend(process.env.RESEND_API_KEY);
   const recipients = process.env.TO_EMAIL.split(',').map((email) => email.trim());
 
-  await resend.emails.send({
+  const { error } = await resend.emails.send({
     from: 'honey <onboarding@resend.dev>',
     to: recipients,
     subject:
@@ -116,4 +116,8 @@ export async function sendDealsEmail(deals) {
         : `${ORIGIN}→${DESTINATION}: nothing special today`,
     html: buildHtml(deals),
   });
+
+  if (error) {
+    throw new Error(`Resend failed to send email: ${JSON.stringify(error)}`);
+  }
 }
