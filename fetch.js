@@ -7,7 +7,7 @@ const TRIP_LENGTH_DAYS = 15; // length of stay for each round trip
 
 // Departure dates to check — every date in this range gets its own search.
 // Currently set to land in Miami for Christmas.
-const SEARCH_START_DATE = '2026-12-18';
+const SEARCH_START_DATE = '2026-12-20';
 const SEARCH_END_DATE = '2026-12-24';
 
 // Only keep offers whose outbound flight lands in Miami by this local
